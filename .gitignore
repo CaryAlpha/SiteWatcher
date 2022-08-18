@@ -42,7 +42,7 @@ dist
 yarn.lock
 package-lock.json
 dataset
-
-adida.txt
-case.md
-data.json
+cookie.json
+config.json
+chainabuse
+run.sh

@@ -81,7 +81,7 @@ async function checkDNS(domain) {
     });
   });
   // if (state.err) return
-  const recentIp = state.result;
+  const recentIp = state.err ? [] : state.result;
   const config = database[domain] || {
     domain,
     recent: [],
