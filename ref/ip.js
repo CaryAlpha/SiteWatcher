@@ -1,17 +1,23 @@
 async function lookupIp(ip) {
     const req = await fetch(
-      "https://api.ipgeolocation.io/ipgeo?include=hostname&ip=" + ip,
+      "https://api.ipgeolocation.io/ipgeo?include=hostname&ip=" + ip+'&apiKey=e153b200d7c246d5b511b4b4736c938d',
       {
         headers: {
-          accept: "application/json",
-          "accept-language": "en,ar;q=0.9,zh;q=0.8,zh-CN;q=0.7",
-          "sec-ch-ua":
-            '"Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"',
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": '"macOS"',
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "same-site",
+          ':authority': 'api.ipgeolocation.io',
+':method': 'GET',
+':path': '/ipgeo?include=hostname&ip=104.196.30.220',
+':scheme': 'https',
+'accept': 'application/json',
+'accept-encoding': 'gzip, deflate, br',
+'accept-language': 'en,ar;q=0.9,zh;q=0.8,zh-CN;q=0.7',
+'referer': 'https://api.ipgeolocation.io/ipgeo?include=hostname&ip=',
+'sec-ch-ua': 'Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104',
+'sec-ch-ua-mobile': '?0',
+'sec-ch-ua-platform': "macOS",
+'sec-fetch-dest': 'empty',
+'sec-fetch-mode': 'cors',
+'sec-fetch-site': 'same-origin',
+'user-agent':' Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
         },
         referrer: "https://ipgeolocation.io/",
         referrerPolicy: "strict-origin-when-cross-origin",
