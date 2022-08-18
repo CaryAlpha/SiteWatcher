@@ -17,9 +17,8 @@ async function checkDNS(domain) {
             });
         });
     });
-
-    if (state.err) return 
-    console.log(domain, state.result)
+    // if (state.err) return 
+    console.log(domain, state.err ? [] : state.result)
 }
 
 async function scanAll() {
