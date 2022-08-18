@@ -2,13 +2,13 @@ const projects = require("./watchList.json");
 const dns = require("dns");
 const fetch = require("node-fetch");
 const fs = require("fs");
-
+const statusFile = __dirname + "/database/status.json";
 let database = null;
 let allIp = new Map();
 const MAX_SIZE = 20;
 
 async function loadDatabase() {
-  database = JSON.parse(fs.readFileSync("./database/status.json", "utf-8"));
+  database = JSON.parse(fs.readFileSync(statusFile, "utf-8"));
   Object.keys(database).forEach((domain) => {
     const config = database[domain];
     config.recent.forEach((item) => {
@@ -62,7 +62,7 @@ async function lookupIp(ip) {
 }
 
 async function saveDatabase() {
-  fs.writeFileSync("./database/status.json", JSON.stringify(database, null, 2));
+  fs.writeFileSync(statusFile, JSON.stringify(database, null, 2));
 }
 
 function wait(ms) {
@@ -87,7 +87,7 @@ async function checkDNS(domain) {
     recent: [],
   };
   config.records = recentIp;
-  config.lastScan = Date.now();
+  config.lastScan = new Date().toISOString();
   const newIps = recentIp.filter(
     (ip) => !config.recent.find((c) => c.ip === ip)
   );
@@ -123,6 +123,18 @@ async function scanAll() {
     }
     await wait(1000);
   }
+  await saveDatabase();
 }
 
-scanAll();
+async function main() {
+  for (let index = 0; index < Infinity; index++) {
+    try {
+      await scanAll();
+    } catch (e) {
+      console.log("scan error", e);
+    }
+    await wait(60 * 1000 * 10);
+  }
+}
+
+main();
